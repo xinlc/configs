@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  demo-web:
+    image: demo/demo
+    restart: always
+    ports:
+      - "8900:80"
+    volumes:
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+
+

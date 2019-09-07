@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  demo-service:
+    image: demo/demo
+    restart: always
+    ports:
+      - "8800:8080"
+    networks:
+      - demo-net
+    volumes:
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      - ~/docker-data/service-data/timezone:/etc/timezone:ro
+      - ~/docker-data/service-data/demo/static/img:/data/static/img
+
+networks:
+    demo-net:
+      external: true
+

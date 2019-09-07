@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  nginx-router:
+    image: nginx:1.17.3
+    ports:
+      - "80:80"
+    restart: always
+    network_mode: host
+    volumes:
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      - ~/docker-data/nginx-router/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ~/docker-data/nginx-router/nginx/conf.d:/etc/nginx/conf.d
+      - ~/docker-data/nginx-router/www:/usr/share/nginx/html
+      - ~/docker-data/nginx-router/logs:/var/log/nginx
+      - ~/docker-data/service-data/demo/static/img:/static/xxx/img
+
