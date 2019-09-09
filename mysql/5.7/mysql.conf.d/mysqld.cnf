@@ -29,3 +29,13 @@ datadir		= /var/lib/mysql
 # Disabling symbolic-links is recommended to prevent assorted security risks
 symbolic-links=0
 sql_mode        = STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+
+# 主从备份
+# server-id服务的唯一标识（主从之间都必须不同）
+server-id=1
+log_bin=master-bin
+log_bin_index=master-bin.index
+binlog_do_db=test
+binlog_ignore_db=mysql
+# log 3天自动删除
+expire_logs_days=3
