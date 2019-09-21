@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings
+  xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <!-- 存放本地仓库的地方 -->
+  <localRepository>/Users/leo/Documents/MavenRepository</localRepository>
+  <pluginGroups></pluginGroups>
+  <proxies></proxies>
+  <!-- 私服的验证信息 -->
+  <servers>
+    <server>
+      <id>releases</id>
+      <username>admin</username>
+      <password>123456</password>
+    </server>
+    <server>
+      <id>snapshots</id>
+      <username>admin</username>
+      <password>123456</password>
+    </server>
+  </servers>
+  <!-- maven对全部仓库的访问全部拦截到私服的public仓库中去，如果私服关闭将无法访问中央工厂 -->
+  <mirrors>
+    <!-- <mirror><id>nexus</id><mirrorOf>*</mirrorOf><name>Local Repository</name><url>http://www.xxx.com/nexus/content/groups/public/</url></mirror> -->
+    <mirror>
+      <id>alimaven</id>
+      <name>aliyun maven</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+      <mirrorOf>central</mirrorOf>
+    </mirror>
+  </mirrors>
+  <!-- 配置仓库的一些信息，其主要作用是用来覆写central中央仓库的一些配置信息 -->
+  <profiles>
+    <profile>
+      <id>env-dev</id>
+      <repositories>
+        <repository>
+          <id>releases</id>
+          <url>http://www.xxx.com/nexus/content/groups/public/</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>snapshots</id>
+          <url>http://www.xxx.com/nexus/content/groups/public/</url>
+          <releases>
+            <enabled>true</enabled>
+            <checksumPolicy>warn</checksumPolicy>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <checksumPolicy>fail</checksumPolicy>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+    <profile>
+      <id>env-prod</id>
+      <repositories>
+        <repository>
+          <id>releases</id>
+          <url>http://www.xxx.com/nexus/content/groups/public/</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>snapshots</id>
+          <url>http://www.xxx.com/nexus/content/groups/public/</url>
+          <releases>
+            <enabled>true</enabled>
+            <checksumPolicy>warn</checksumPolicy>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <checksumPolicy>fail</checksumPolicy>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
+  <!-- 激活上面配置的仓库信息 -->
+  <activeProfiles>
+    <activeProfile>env-dev</activeProfile>
+    <activeProfile>env-prod</activeProfile>
+  </activeProfiles>
+</settings>
+
