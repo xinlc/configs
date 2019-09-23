@@ -15,6 +15,11 @@ services:
       - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
       - ~/docker-data/mysql-data:/var/lib/mysql
       - ~/docker-data/mysql.conf.d:/etc/mysql/mysql.conf.d
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
 
   redis:
     image: redis:5.0.5
@@ -28,6 +33,11 @@ services:
     volumes:
       - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
       - ~/docker-data/redis-data:/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
 
 networks:
   demo-net:
