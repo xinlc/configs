@@ -3,7 +3,7 @@ version: "3"
 services:
   demo-web:
     image: demo/demo
-    restart: always
+    restart: unless-stopped
     ports:
       - "8900:80"
     volumes:

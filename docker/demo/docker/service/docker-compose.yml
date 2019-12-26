@@ -3,7 +3,7 @@ version: "3"
 services:
   demo-service:
     image: demo/demo
-    restart: always
+    restart: unless-stopped
     ports:
       - "8800:8080"
     networks:
