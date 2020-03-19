@@ -1,0 +1,23 @@
+version: "2.2"
+
+services:
+  gitlab:
+    image: 'gitlab/gitlab-ce:latest'
+    restart: unless-stopped
+    ports:
+      - '11080:80'
+      - '11443:443'
+      - '11022:22'
+    volumes:
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - './config:/etc/gitlab'
+      - './logs:/var/log/gitlab'
+      - './data:/var/opt/gitlab'
+    cpus: '3'
+    mem_limit: 5120m
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "2"

@@ -1,0 +1,23 @@
+version: "2.2"
+
+services:
+  dns-server:
+    image: 'jpillora/dnsmasq:latest'
+    restart: unless-stopped
+    ports:
+      - '53:53/udp'
+      - '5380:8080'
+    environment:
+      - HTTP_USER=root
+      - HTTP_PASS=root
+    volumes:
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - './dnsmasq.conf:/etc/dnsmasq.conf'
+    cpus: '0.5'
+    mem_limit: 512m
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "2"

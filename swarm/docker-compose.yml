@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  portainer:
+    image: portainer/portainer:latest
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    volumes:
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /mnt/docker-data/portainer_data:/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "2"
+
+  visualizer:
+    image: dockersamples/visualizer:latest
+    restart: unless-stopped
+    ports:
+      - "9001:8080"
+    volumes:
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "2"
